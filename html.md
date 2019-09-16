@@ -25,4 +25,34 @@ HTML不是一门编程语言，而是一种用于定义内容结构的标记语�
 不包含任何内容的元素称为空元素
 
 ### HTML文档详解
++ `<!DOCTYPE html>` — 文档类型
++ `<html></html> — <html>` 元素。这个元素包含了整个页面的内容，有时也被称作根元素。
++ `<head></head> — <head>` 元素。这个元素放置的内容不是展现给用户的，而是包含例如面向搜索引擎的搜索关键字（keywords）、页面描述、CSS 样式表和字符编码声明等
++ `<meta charset="utf-8">` — 这个元素指定了当前文档使用 UTF-8 字符编码 ，UTF-8 包括绝大多数人类已知语言的字符。基本上 UTF-8 可以处理任何文本内容，还可以避免以后出现某些问题，我们没有任何理由再选用其他编码。
++ `<title></title> — <title>` 元素。这个元素设置页面的标题，显示在浏览器标签页上，同时作为收藏网页的描述文字
++ `<body></body> — <body>` 元素。这个元素包含期望让用户在访问页面时看到的内容，可以是文本、图像、视频、游戏、可播放的音轨或其他内容。
+
+## 其他内容
+### data-属性
+
+### cookie、sessionStorage、localStorage之间的不同？
+||cookie|sessionStorage|localStorage|
+|-|-|-|-|
+|发起|客户端或者服务端|客户端|客户端|
+|过期时间|手动设置|永久|tab关闭|
+|是否会跟http请求发送到服务端|通过cookie header自动发送|不会|不会|
+|容量|4kb|5MB|5MB|
+|可访问性|任何窗口|任何窗口|同一标签页|
+
+### `<script>, <script async> and <script defer>`之间的不同.
++ `<script>`HTML解析暂停,script下载并执行完毕后，HTML继续解析。
++ `<script async>`script下载时HTML解析不暂停，script执行时HTML解析暂停，script执行结束，继续HTML解析。
++ `<script defer>`script下载不影响HTML解析，HTML解析完毕，开始执行script。
++ 没有src属性的`<script>`会忽略defer和async。
+
+###  为什么通常把 CSS `<link>s 放在 <head></head> 中 JS <script>s 放在 </body>`前? 有什么例外情况？
+
+
+
+
 
