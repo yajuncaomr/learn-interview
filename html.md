@@ -44,7 +44,7 @@ HTML不是一门编程语言，而是一种用于定义内容结构的标记语�
 |容量|4kb|5MB|5MB|
 |可访问性|任何窗口|任何窗口|同一标签页|
 
-### `<script>, <script async> and <script defer>`之间的不同.
+### `<script>, <script async> and <script defer>`之间的不同？
 + `<script>`HTML解析暂停,script下载并执行完毕后，HTML继续解析。
 + `<script async>`script下载时HTML解析不暂停，script执行时HTML解析暂停，script执行结束，继续HTML解析。
 + `<script defer>`script下载不影响HTML解析，HTML解析完毕，开始执行script。
