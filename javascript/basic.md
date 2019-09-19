@@ -47,6 +47,10 @@
 ```javascript
     typeof v === 'boolean'
 ```
+#### 判断Null类型
+```javascript
+    v === null//typeof null 为'object'
+```
 #### 判断字符串
 ```javascript
     typeof v === 'string'
@@ -75,4 +79,36 @@ fn.call(thisArgs,arg1,arg2);//call接受一个参数列表，并运行
 fn.apple(thisArgs,[arg1,arg2]);//apply接受一个参数数组，并运行
 fn.bind(thisArgs,arg1,arg2);//bind接受一个参数列表，但不运行
 
-## 
+## falsy values(虚值)
+
+只有6个falsy values
+|||
+|-----|-----------|
+|false|false关键字|
+|0|数值0 <br>当 BigInt 作为布尔值使用时, 遵从其作为数值的规则. 0n 是 falsy 值|
+|"", '', ``|这是一个空字符串 (字符串的长度为零). JavaScript 中的字符串可用双引号 "", 单引号 '', 或 模板字面量 `` 定义。|
+|null|null-缺少值|
+|undefined|undefined-原始值|
+|NaN|NaN-非数值|
+
+1. false、0、""
+```javascript
+    false == 0 //true
+    0 == ""//true
+    "" == false//true
+```
+2. null和undefined
+```javascript
+    null == null//true
+    undefined == undefined//true
+    null == undefined//true
+```
+3. NaN  
+    NaN不与任何值等价
+```javascript
+    NaN == null//false
+    NaN == undefined//false
+    NaN == NaN//false
+```
+
+

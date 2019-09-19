@@ -105,7 +105,9 @@
 
     const values = new Set();
 
-    for()
+    for(let i of Array(500)){
+        values.add(getRandom(1,10))
+    }
 ```
 
 ## 
