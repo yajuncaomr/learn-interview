@@ -1,0 +1,32 @@
+# Object
+## Object构造函数的属性
++ Object.length(值为1);
++ Object.prototype
+
+## Object构造函数的方法
++ Object.assign()
++ Object.create()
++ Object.defineProperty()
++ Object.defineProperties()
++ Object.entries()
++ Object.freeze()
++ Object.getOwnPropertyDescriptor()
++ Object.getOwnPropertyNames()
++ Object.getOwnPropertySymbols()
++ Object.getPrototypeOf()
++ Object.is()
++ Object.isExtensible()
++ Object.isFrozen()
++ Object.keys()
++ Object.preventExtensions()
++ Object.seal()
++ Object.setPrototypeOf()
++ Object.values()
+
+## 实例方法
++ Object.prototype.hasOwnProperty()
++ Object.prototype.isPrototypeOf()
++ Object.prototype.propertyIsEnumberable()
++ Object.prototype.toLocalString()
++ Object.prototype.toString()
++ Object.prototype.valueOf()
