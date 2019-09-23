@@ -55,3 +55,29 @@ next()方法返回一个对象，这个对象包含两个属性：value和done,v
 
 当在生成器函数中显式return时，会导致生成器立即变成完成状态，即调用next()方法返回的对象的done为true。如果return后面跟了一个值，那么这个值会作为当前调用next()方法返回的value值。
 
+### 使用迭代器遍历二维数组并转换为一维数组
+```javascript
+    function* iterArr(arr){
+        if(Array.isArray(arr)){
+            for(let i;i < arr.length;i++){
+                yield* iterArr(arr[i]);
+            }
+        }else{
+            yield arr;
+        }
+    }
+    var arr = ['a',['b','c'],['d','e']];
+    //使用for-of遍历
+    for(var x of iterArr(arr)){
+        console.log(x);
+    }
+
+    //或者直接将迭代器展开
+    var arr2 = ['a',['b',['c',['d','e']]]];
+    var gen = iterArr(arr2);
+    arr2 = [...gen];
+```
+
+## async function  
+async function 用来定义一个返回AsyncFunction对象的异步函数。异步函数是指通过事件循环异步执行的函数，它会通过一个隐式的Promise返回其结果。
+
