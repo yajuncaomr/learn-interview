@@ -35,3 +35,55 @@ Promise.prototype.catch(onRejected)
 Promise.prototype.then(onFulfilled,onRejected)
 
 Promise.prototype.finally(onFinally)
+
+## 约定
++ 在本轮javascript event loop(事件循环)运行完成之前，回调函数是不会被调用的。
++ 通过then()添加的回调函数总会被调用，即便它是在异步操作完成之后才被添加的函数。
++ 通过多次调用then(),可以添加多个回调函数，它们会按照插入顺序一个接一个独立执行。
+
+## 组合
+Promise.resolve()和Promise.reject()是手动创建一个已经resolve或者reject的Promise的快捷方法。  
+Promise.all()和Promise.race()是并行运行异步操作的两个组合式工具。
+```javascript
+    Promise.all([func1(),func2(),func3(),func4()]).then(([result1,result2,result3,result4]) => {});
+```  
+运用reduce实现时序组合
+```javascript
+    [func1,func2,func3,func4].reduce((p,f) => p.then(f),Promise.resolve())
+    .then(result4 => {});
+```  
+
+可复用的形式
+```javascript
+    const applyAsync = (acc,val) => acc.then(val);
+    const composeAsync = (...funcs) => (x) => funcs.reduce(applyAsync,Promise.resolve(x));//funcs中的函数可以是异步（Promise异步）或同步
+```
+
+ES2017中时许可通过async awiat实现  
+```javascript
+async function composeAsync(...funcs){
+    let result;
+
+    for(const f of funcs){
+        result await f(result);
+    }
+    return result;
+}
+```
+
+## 时序  
+已经resolve的Promise,传递给then()的函数也总是会被异步调用:
+```javascript
+    Promise.resolve().then(() => console.log(2));
+    console.log(1)//1 2
+```
+传递到then中的函数被置于一个微任务队列，而不是立即执行，这意味着它是在javascript事件队列的所有运行时结束了，事件队列被清空之后，才开始执行。  
+
+```javascript
+    const wait = ms => new Promise(resolve => setTimeout(resolve,ms));
+
+    wait().then(() => console.log(4));
+    Promise.resolve().then(() => console.log(2)).then(() => console.log(3));
+    console.log(1);
+```
+
