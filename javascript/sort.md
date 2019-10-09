@@ -316,4 +316,73 @@
     }
 ```
 
+## 桶排序  
+或箱排序，工作的原理是将数组分到有限数量的桶里。每个桶再个别排序（有可能再使用别的排序算法或是以递归方式继续使用桶排序进行排序）。
+1. 设置一个定量的数组作为空桶。
+2. 寻访数列，并且把项目一个个的放到对应的桶中。
+3. 对每个不是空的桶进行排序。
+4. 从不是空的桶里把项目在放回原来的序列中。
+ 
+ ```javascript
+    function bucketSort(arr,num){
+        var min = Math.min.apply(Math,arr);
+        var max = Math.max.apply(Math,arr);
+        var buckets = [];
+        var bucketsNum = num || 5;
+        var bucketsSize = Math.floor(max - min/bucketsNum) + 1;
+        for(var i = 0;i < arr.length;i ++){
+            var index = Math.floor(arr[i]/bucketsSize);
+            !buckets[index] && (buckets[index] = []);
+            buckets[index].push(arr[i]);
+            var l = buckets[index].length;
+            while(l > 0){
+                buckets[index][l] < buckets[index][l - 1] && swap(buckets[index],l,l - 1);
+                l--;
+            }
+        }
+         
+        arr = [];
+        for(var j = 0;j < buckets.length;j++){
+            arr = arr.concat(buckets[j]);
+        }
+
+        function swap(arr,i,j){
+            var t = arr[i];
+            arr[i] = arr[j];
+            arr[j] = t;
+        }
+        return arr;
+    }
+ ```
+
+ ## 基数排序（Radix sort）  
+ 是一种非比较型整数排序算法，其原理是将整数按位数切割成不同的数字，然后按每个位数分别比较。由于整数也可以表达字符串（比如名字和日期）和特定格式的浮点数，所以基数排序也不是只能使用于整数。  
+ 将所有待比较数值（正整数）统一为同样的数字长度，数字较短的数前面补零。然后从低位开始，依次进行一次排序。这样从最低位排序一直到最高位排序完成以后，数列就变成一个有序数列。
+
+ ```javascript
+    function radixSort(arr){
+        var max = Math.max.apply(Math,arr) + '';
+        var digit = max.length;
+        var start = 1;   
+        var buckets = [];
+         while(digit > 0){
+             start *= 10;
+             for(var i = 0;i < arr.length;i ++){
+                 var index = Math.floor(arr[i]%start/(start/10));
+                 !buckets[index] && (buckets[index] = []);
+                 buckets[index].push(arr[i]);
+             }
+            arr = [];
+             for(var j = 0; j < buckets.length;j++){
+                 buckets[j] && (arr = arr.concat(buckets[j])); 
+             }
+             buckets = [];
+             digit --
+         }
+         return arr;
+
+    }
+ ```
+
+
 
